@@ -1,0 +1,63 @@
+@import './mapas.less';
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+// @fontePrincipal: Roboto,sans-serif;
+// @fonteDoTitulo: Lobster, curive;
+// @corDoTexto: #fff;
+// @corDeFundo:  #eb3b5a;
+// @corDoTextoDoBotao: #000;
+// @corDoFundoDoBotao: #f7b731;
+.container{
+    max-width: 1140px;
+    width: 100%;
+}
+body{
+    background-color: #d3dde2;
+}
+    header{
+        background-color: #mapas[corDeFundo];
+        display: flex;
+        justify-content: center;
+        font-size: 2em;
+        
+        .navbar{
+            height: 50px;
+            .box-anchor{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                a > strong{
+                    
+            }
+        }
+    }
+
+    .row{
+        display: grid;
+        grid-template-columns: 300px 300px 300px;
+        justify-content: space-around;
+    }
+
+    .item{
+        width: 260px;
+        display: block;
+        border: 5px solid #e59a9a;
+        border-radius: 5px;
+        margin-bottom: 16px;
+        margin-top: 16px;   
+        .h4-name{
+            color: #c10d0d;
+            background-color: #eef2b8;
+            border-top: 7px solid  #e59a9a ;
+        }
+    }
+
+    .card-img{
+        width: 250px;      
+        
+    }
