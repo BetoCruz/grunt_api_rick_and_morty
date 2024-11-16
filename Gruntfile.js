@@ -15,7 +15,6 @@ module.exports = function(grunt){
                 },
                 files: {
                     'dist/styles/main.min.css' : 'src/styles/main.less',
-                    'dist/styles/roulette.min.css' : 'src/styles/roulette.less',
                 }
             }
         },
@@ -24,46 +23,30 @@ module.exports = function(grunt){
                 files:['src/styles/**/*.less'],
                 tasks:['less:development']
             },
-            replace:{
+            html:{
                 files:['src/*.html'],
                 tasks: ['replace:dev']
             },
-            // uglify: {
-            //     files:['src/scripts/**/*.js'],
-            //     tasks:['uglify:targetDev']
-            // }
+            js: {
+                files:['src/scripts/**/*.js'],
+                tasks:['uglify:targetDev']
+            }
         },
         uglify:{
-            targetDist:{
-                options:{
-                    removeComments: true,
-                    collapseWhitespace: true,
-                },
+            target:{
                 files:{
                     'dist/scripts/main.min.js':'src/scripts/main.js',
-                    'dist/scripts/roulette.min.js':'src/scripts/roulette.js',
                 }
-            },
-            // targetDev:{
-            //     options:{
-            //         removeComments: true,
-            //     },
-            //     files:{
-            //         'dev/scripts/main.js':'src/scripts/main.js',
-            //         'dev/scripts/roulette.js':'src/scripts/roulette.js',
-            //     }
-            // }
+            } 
         },
         htmlmin:{
             dist:{
                 options:{
                     removeComments: true,
-                    collapseWhitespace: true,
+                    collapseWhitespace: true
                 },
                 files:{
                     'dist/index.html':'src/index.html',
-                    'dist/roulette.html':'src/roulette.html',
-                    
                 }
             }
         },
@@ -75,11 +58,6 @@ module.exports = function(grunt){
                             match: 'ENDERECO_DO_CSS',
                             replacement: './styles/main.css'
                         },
-                        
-                        {
-                            match: 'ENDERECO_DO_ROULETTE_JS',
-                            replacement: '../src/scripts/roulette.js'
-                        },
                         {
                             match: 'ENDERECO_DO_MAIN_JS',
                             replacement: '../src/scripts/main.js'
@@ -90,8 +68,8 @@ module.exports = function(grunt){
                     {
                         expand: true,
                         flatten: true,
-                        src:['src/index.html','src/index_roulette.html'],
-                        dest:'dev',
+                        src:['src/index.html'],
+                        dest:'dev'
                     }
                 ]
             },
@@ -106,10 +84,6 @@ module.exports = function(grunt){
                             match: 'ENDERECO_DO_MAIN_JS',
                             replacement: './scripts/main.min.js'
                         },
-                        {
-                            match: 'ENDERECO_DO_ROULETTE_JS',
-                            replacement: './scripts/roulette.min.js'
-                        }
                     ]
                 },
                 files:[
@@ -127,9 +101,11 @@ module.exports = function(grunt){
 
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-replace');
+    grunt.loadNpmTasks('grunt-contrib-htmlmin');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+
+
 
     grunt.registerTask('default',['watch'])
     grunt.registerTask('build',['less:production','htmlmin:dist','replace:dist','uglify'])
